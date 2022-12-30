@@ -1,0 +1,27 @@
+[
+    {
+        "post_id": 1,
+        "title": "Alisher Isaevdan biznes va IT bo’yicha master klass",
+        "body": "Najot Ta'lim jamoasi o'z o'quvchilari uchun manfaatli bo'lgan musobaqalarni tashkil etishda davom etadi. Biz bu gal markazimizdagi uch soha vakillari, ya'ni UX/UI dizayner, frontend va backend",
+        "count": 0,
+        "delete_at": false,
+        "dataH": "14-00",
+        "dataY": "17-01-2022",
+        "status": "pending",
+        "dataX": "06-14-2005",
+        "date_to": "17-01-2022"
+    },
+    {
+        "post_id": 2,
+        "title": "Toxirrrr",
+        "body": "salomkdsyfhklaidjfkms",
+        "avatar": "1672403747901video_2022-12-07_21-42-03.mp4",
+        "count": "0",
+        "delete_at": "true",
+        "dataH": "2345654f",
+        "dataY": "fsedfew",
+        "status": "pending",
+        "dataX": "123453f",
+        "date_to": 1672403747901
+    }
+]

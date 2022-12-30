@@ -1,0 +1,11 @@
+/subCategory:
+  get:
+    tags:
+      - subCategory
+    responses:
+      '200':  
+        description: all subCategory
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubcategoryGet'

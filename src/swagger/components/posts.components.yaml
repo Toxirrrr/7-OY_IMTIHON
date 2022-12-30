@@ -1,0 +1,67 @@
+components:
+  schemas:
+    postGet: 
+      type: object
+      properties:
+        post_id: 
+          type: integer
+        title:
+          type: string
+        body:
+          type: string
+        avatar: 
+          type: string
+        count: 
+          type: integer
+        delete_at: 
+          type: string
+        dataH: 
+          type: string
+        dataY: 
+          type: string
+        status: 
+          type: string
+        dataX: 
+          type: string
+        date_to: 
+          type: string
+        user:
+          type: object
+          properties:
+            users_id: 
+              type: integer
+            fullname: 
+              type: string
+            tel: 
+              type: string
+    
+
+    addPost:
+      type: object
+      properties:
+        title:
+          type: string
+        body:
+          type: string
+        avatar: 
+          type: string
+          format: binary
+        count: 
+          type: integer
+        delete_at: 
+          type: string
+        dataH: 
+          type: string
+        dataY: 
+          type: string
+        dataX: 
+          type: string
+        date_to: 
+          type: string
+        user:
+          type: object
+          properties:
+            fullname: 
+              type: string
+            tel: 
+              type: string
