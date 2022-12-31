@@ -13,7 +13,6 @@ const accessLogStream = fs.createWriteStream(
     { flags: 'a' }
 );
 
-
 process.env.EXP = '7h';
 
 process.DEFAULT = {};
