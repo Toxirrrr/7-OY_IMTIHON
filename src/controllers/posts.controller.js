@@ -1,7 +1,7 @@
 import fileUpload from "express-fileupload"
 import { read, write } from "../utils/model.js"
 import path from 'path'
-import moment from 'moment';
+import moment from "moment/moment.js"
 moment.locale('uz-latn')
 
 let GET = (req, res) => {
@@ -14,9 +14,7 @@ let GET = (req, res) => {
 
     let data = posts.filter(post => {
 
-        post.user = users.find(user => user.admin_id == post.users_id && user.fullname && user.tel && delete user.password && delete user.userId)
-
-        posts.date_to = moment(posts.date_to).format("LLLL")
+        post.user = users.find(user => user.users_id == post.post_id && user.fullname && user.tel && delete user.password && delete user.userId && (posts.date_to = moment(posts.date_to).format("LLLL")))
 
         return post
     }).slice((page - 1) * limit, page * limit);
@@ -28,8 +26,11 @@ let POSTS = (req, res) => {
     try {
         let posts = read('posts')
         let users = read('users')
+        let img = read('img')
 
         let { avatar } = req.files;
+
+        console.log(avatar);
 
         let {
             title,
@@ -40,12 +41,11 @@ let POSTS = (req, res) => {
             dataY,
             status,
             dataX,
-            date_to,
             fullname,
             tel
         } = req.body
-        // // // // // 
 
+        // // // // // TITLE
         if (!title) {
             res.json('invalid title')
             return
@@ -54,6 +54,8 @@ let POSTS = (req, res) => {
             res.json('invalid title')
             return
         }
+
+        // // // // // TEL
         if (!tel) {
             res.json('invalid tel')
             return
@@ -62,8 +64,8 @@ let POSTS = (req, res) => {
             res.json('invalid phone number')
             return
         }
-        // // // // //
 
+        // // // // // BODY
         if (!body) {
             res.json('invalid body')
             return
@@ -72,17 +74,8 @@ let POSTS = (req, res) => {
             res.json('invalid body')
             return
         }
-        // // // // //
 
-        if (!tel) {
-            res.json('invalid number')
-            return
-        }
-        if (!(tel.trim() && tel.length >= 8)) {
-            res.json('invalid tel')
-            return
-        }
-        // // // // //
+        // // // // // DELETE_AT
         if (!delete_at) {
             res.json('delete_at undefined')
             return
@@ -91,8 +84,8 @@ let POSTS = (req, res) => {
             res.json('invalid delete_at')
             return
         }
-        // // // // // 
 
+        // // // // // DATAH
         if (!dataH) {
             res.json('dataH')
             return
@@ -101,8 +94,8 @@ let POSTS = (req, res) => {
             res.json('invalid dataH')
             return
         }
-        // // // // //
 
+        // // // // // DATAY
         if (!dataY) {
             res.json('dataY')
             return
@@ -111,8 +104,8 @@ let POSTS = (req, res) => {
             res.json('invalid dataY')
             return
         }
-        // // // // // //
 
+        // // // // // //STATUS
         if (!status) {
             res.json('status')
             return
@@ -121,8 +114,8 @@ let POSTS = (req, res) => {
             res.json('invalid status')
             return
         }
-        // // // // // //
 
+        // // // // // // DATAX
         if (!dataX) {
             res.json('dataX undefined')
             return
@@ -131,18 +124,8 @@ let POSTS = (req, res) => {
             res.json('invalid dataX')
             return
         }
-        // // // // // //
 
-        // if (!date_to) {
-        //     res.json('date_to undefined')
-        //     return
-        // }
-        // if (!(date_to.trim() && date_to.length >= 1)) {
-        //     res.json('invalid date_to')
-        //     return
-        // }
-        // // // // //
-
+        // // // // // FULLNAME
         if (!fullname) {
             res.json('FullName Undefined')
             return
@@ -151,13 +134,11 @@ let POSTS = (req, res) => {
             res.json('invalid FullName')
             return
         }
-        // // // // //
 
-        // let telVerify = posts.find(post => post.tel == tel)
-
-        // if (telVerify) {
-        //     throw new Error('tel number exist')
-        // }
+        let telVerify = posts.find(post => post.tel == tel)
+        if (telVerify) {
+            throw new Error('tel number exist')
+        }
 
         let fileName = Date.now() + avatar.name.replace(/\s/g, '')
 
@@ -181,8 +162,6 @@ let POSTS = (req, res) => {
             date_to: Date.now()
         }
 
-        console.log(newPosts);
-
         if (!newPosts) {
             throw new Error('invalid posts')
         }
@@ -192,6 +171,17 @@ let POSTS = (req, res) => {
             fullname,
             tel
         }
+
+        let newImg = {
+            name: avatar.name,
+            title: fileName,
+            size: avatar.size,
+            mimetype: avatar.mimetype
+        }
+
+        img.push(newImg)
+
+        write('img', img)
 
         users.push(newUsers)
 
