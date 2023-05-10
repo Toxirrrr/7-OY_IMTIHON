@@ -26,11 +26,11 @@ let POSTS = (req, res) => {
     try {
         let posts = read('posts')
         let users = read('users')
-        let img = read('img')
+        // let img = read('img')
 
-        let { avatar } = req.files;
+        // let { avatar } = req.files;
 
-        console.log(avatar);
+        // console.log(avatar);
 
         let {
             title,
@@ -140,19 +140,19 @@ let POSTS = (req, res) => {
             throw new Error('tel number exist')
         }
 
-        let fileName = Date.now() + avatar.name.replace(/\s/g, '')
+        // let fileName = Date.now() + avatar.name.replace(/\s/g, '')
 
-        if (avatar.mimetype == 'image/jpeg' || avatar.mimetype == 'image/png' || avatar.mimetype == 'image/webp' || avatar.mimetype == 'image/svg') {
-            avatar.mv(path.resolve('uploads/avatar', fileName))
-        } else {
-            avatar.mv(path.resolve('uploads/video', fileName))
-        }
+        // if (avatar.mimetype == 'image/jpeg' || avatar.mimetype == 'image/png' || avatar.mimetype == 'image/webp' || avatar.mimetype == 'image/svg') {
+        //     avatar.mv(path.resolve('uploads/avatar', fileName))
+        // } else {
+        //     avatar.mv(path.resolve('uploads/video', fileName))
+        // }
 
         let newPosts = {
             post_id: posts.at(-1)?.post_id + 1 || 1,
             title,
             body,
-            avatar: fileName,
+            // avatar: fileName,
             count,
             delete_at,
             dataH,
@@ -172,16 +172,16 @@ let POSTS = (req, res) => {
             tel
         }
 
-        let newImg = {
-            name: avatar.name,
-            title: fileName,
-            size: avatar.size,
-            mimetype: avatar.mimetype
-        }
+        // let newImg = {
+        //     name: avatar.name,
+        //     title: fileName,
+        //     size: avatar.size,
+        //     mimetype: avatar.mimetype
+        // }
 
-        img.push(newImg)
+        // img.push(newImg)
 
-        write('img', img)
+        // write('img', img)
 
         users.push(newUsers)
 

@@ -1,0 +1,9 @@
+# dependencies
+.gitignore
+node_modules/
+package-lock.json
+access.log
+
+# environment variables
+.env
+.env.production
